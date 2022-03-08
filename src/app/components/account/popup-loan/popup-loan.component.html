@@ -1,0 +1,86 @@
+<div class="modal-header m-header text-center" style="padding-top: 0px; padding-bottom: 0px;">
+    <h4 class="modal-title h-title w-100"> {{titleModal}}</h4>
+    <span (click)="Dismiss()" aria-hidden="true" style="font-size: 25px;">&times;</span>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" [formGroup]="AddForm">       
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-md-10 require">Limit ($)</label>
+            <input type="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && checkvalue.limit.errors }" readonly
+             formControlName="limit" placeholder="Select object to get limit of the loan">
+             <div *ngIf="submitted && checkvalue.limit.errors" class="invalid-feedback">
+              <div *ngIf="checkvalue.limit.errors.required">
+                This field is not bank !
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="col-md-10 require">Formality</label>
+            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && checkvalue.formality.errors }"
+              formControlName="formality" placeholder="input...">
+              <div *ngIf="submitted && checkvalue.formality.errors" class="invalid-feedback">
+              <div *ngIf="checkvalue.formality.errors.required">
+                This field is not bank !
+              </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+          <label class="col-md-10 require">Transfer content</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [ngClass]="{ 'is-invalid': submitted && checkvalue.purpose.errors }" formControlName="purpose"></textarea>
+             <div *ngIf="submitted && checkvalue.purpose.errors" class="invalid-feedback">
+              <div *ngIf="checkvalue.purpose.errors.required">
+                This field is not bank !
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="col-md-10 require">Interest rate</label>
+          <ng-select [ngClass]="{ 'is-invalid': submitted && checkvalue.rate_id.errors }" formControlName="rate_id">
+            <ng-option value="">Select rate</ng-option>
+            <ng-option *ngFor="let rate of dataRateInput" [value]="rate.id">{{rate.name}} - {{rate.rate}} %</ng-option>
+          </ng-select>
+          <div *ngIf="submitted && checkvalue.rate_id.errors" class="invalid-feedback">
+            <div *ngIf="checkvalue.rate_id.errors.required">
+              This field is not bank !
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="col-md-10 require">Object</label>
+          <ng-select [ngClass]="{ 'is-invalid': submitted && checkvalue.object.errors }" formControlName="object" (change)="filterLimit($event)">
+            <ng-option value="">Select object</ng-option>
+            <ng-option value="Company">Company</ng-option>
+            <ng-option value="Customer">Customer</ng-option>
+            <ng-option value="Personal">Personal</ng-option>
+          </ng-select>
+          <div *ngIf="submitted && checkvalue.object.errors" class="invalid-feedback">
+            <div *ngIf="checkvalue.object.errors.required">
+              This field is not bank !
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="col-md-10 require">Amount</label>
+            <input type="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && checkvalue.amount.errors }"
+             formControlName="amount" placeholder="input...">
+             <div *ngIf="submitted && checkvalue.amount.errors" class="invalid-feedback">
+              <div *ngIf="checkvalue.amount.errors.required">
+                This field is not bank !
+              </div>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="float-right">
+      <button type="button" class="btn btn-md btn-outline-success" (click)="onSubmit()">
+        <i class="fa-plus-circle fas"></i> Save
+      </button>
+      <button type="button" class="btn btn-md btn-outline-danger" (click)="Dismiss()"
+        style="margin-left: 1em;">
+        <i class="far fa-times-circle"></i> Close
+      </button>
+    </div>
+  </div>

@@ -1,0 +1,41 @@
+<div class="modal-header m-header text-center" style="padding-top: 0px; padding-bottom: 0px;">
+    <h4 class="modal-title h-title w-100"> {{titleModal}}</h4>
+    <span (click)="Dismiss()" aria-hidden="true" style="font-size: 25px;">&times;</span>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" [formGroup]="AddForm">       
+      <div class="row">
+        <div class="col-md-6">
+          <label class="col-md-10 require">Code</label>
+            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && checkvalue.code.errors }"
+             formControlName="code" placeholder="input...">
+             <div *ngIf="submitted && checkvalue.code.errors" class="invalid-feedback">
+              <div *ngIf="checkvalue.code.errors.required">
+                This field is not bank !
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <label class="col-md-10 require">Name</label>
+              <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && checkvalue.name.errors }"
+               formControlName="name" placeholder="input...">
+               <div *ngIf="submitted && checkvalue.name.errors" class="invalid-feedback">
+                <div *ngIf="checkvalue.name.errors.required">
+                  This field is not bank !
+                </div>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="float-right">
+      <button type="button" class="btn btn-md btn-outline-success" (click)="onSubmit()">
+        <i class="fa-plus-circle fas"></i> Save
+      </button>
+      <button type="button" class="btn btn-md btn-outline-danger" (click)="Dismiss()"
+        style="margin-left: 1em;">
+        <i class="far fa-times-circle"></i> Close
+      </button>
+    </div>
+  </div>
